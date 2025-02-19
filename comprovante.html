@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprovante Indenizatório</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@300;600&display=swap');
+
+        body {
+            font-family: 'Libre Franklin', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #e8e8e8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: #fff;
+            padding: 25px;
+            width: 500px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            border: 3px solid #0b3b69;
+            position: relative;
+            text-align: center;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            border-bottom: 2px solid #0b3b69;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .header img {
+            width: 80px;
+            margin-bottom: 5px;
+        }
+
+        .header .title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #0b3b69;
+        }
+
+        .header .subtitle {
+            font-size: 14px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .info {
+            text-align: left;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background: #f8f8f8;
+            border-radius: 5px;
+            font-size: 15px;
+        }
+
+        .info p {
+            margin: 8px 0;
+        }
+
+        .info p strong {
+            color: #0b3b69;
+        }
+
+        .footer {
+            font-size: 12px;
+            color: #555;
+            margin-top: 15px;
+            border-top: 1px solid #ccc;
+            padding-top: 10px;
+        }
+
+        .btn {
+            background-color: #d89e00;
+            color: white;
+            padding: 12px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 15px;
+            font-size: 14px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .btn:hover {
+            background-color: #b78500;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container" id="comprovante">
+        <div class="header">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Bras%C3%A3o_da_Rep%C3%BAblica_Federativa_do_Brasil.svg/1200px-Bras%C3%A3o_da_Rep%C3%BAblica_Federativa_do_Brasil.svg.png" alt="Brasão do Governo">
+            <div class="title">COMPROVANTE INDENIZATÓRIO</div>
+            <div class="subtitle">Documento oficial</div>
+        </div>
+
+        <div class="info">
+            <p><strong>Nome:</strong> {{nome}}</p>
+            <p><strong>CPF:</strong> {{cpf}}</p>
+            <p><strong>Nome da Mãe:</strong> {{mae}}</p>
+            <p><strong>Protocolo:</strong> {{protocolo}}</p>
+        </div>
+
+        <button class="btn" onclick="baixarPDF()">Baixar Comprovante</button>
+
+        <div class="footer">Este documento é gerado automaticamente e tem validade legal conforme regulamentação vigente.</div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <script>
+        function baixarPDF() {
+            const comprovante = document.getElementById('comprovante');
+
+            const options = {
+                margin: 10,
+                filename: 'comprovante_indenizatorio.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+
+            html2pdf().from(comprovante).set(options).save();
+        }
+    </script>
+
+</body>
+
+</html>
